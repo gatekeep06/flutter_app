@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/HomePages/Catalog.dart';
+import 'package:flutter_app/HomePages/Profile.dart';
+import 'package:flutter_app/HomePages/Search.dart';
 
 class BottomNavMenu extends State<StatefulWidget> {
   int _selectedIndex = 0;
@@ -7,16 +10,18 @@ class BottomNavMenu extends State<StatefulWidget> {
     Text('Catalog'),
     TextField(decoration: InputDecoration(
         icon: Icon(Icons.search),
-        border: OutlineInputBorder(),
-        focusedBorder: OutlineInputBorder()
+        hintText: 'Search',
+        border: UnderlineInputBorder(),
+        fillColor: Colors.white,
+        filled: true
     ),),
     Text('Profile')
   ];
 
-  static const List<Widget> _navMenuBodyItems = <Widget>[
-    Text('Catalog'),
-    Text('Search'),
-    Text('Profile')
+  static List<Widget> _navMenuBodyItems = <Widget>[
+    Catalog(),
+    Search(),
+    Profile()
   ];
 
   void _onItemTapped(int index) {
@@ -31,7 +36,9 @@ class BottomNavMenu extends State<StatefulWidget> {
       appBar: AppBar(
         title: _navMenuAppBarItems.elementAt(_selectedIndex),
       ),
+
       body: _navMenuBodyItems.elementAt(_selectedIndex),
+
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -44,7 +51,7 @@ class BottomNavMenu extends State<StatefulWidget> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
-            label: 'Person',
+            label: 'Profile',
           ),
         ],
         currentIndex: _selectedIndex,
