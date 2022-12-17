@@ -21,7 +21,7 @@ class CommodityElement extends StatelessWidget {
           Container(
             width: 75,
             height: 75,
-            child: Image.asset(image_path, fit: BoxFit.scaleDown),
+            child: Image.network(image_path, fit: BoxFit.cover),
           ),
           Text(commodity_name),
           Text('$cost \$'),

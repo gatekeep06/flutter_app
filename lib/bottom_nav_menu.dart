@@ -8,7 +8,13 @@ import 'user.dart';
 
 class BottomNavMenu extends State<StatefulWidget> {
 
-  User nonExistentPerson = User("https://proza.ru/photos/ibis2.jpg", "Евгений", "Самусенко", "+375298740491", "eugen1", "1234");
+  User nonExistentPerson = User(
+      "https://sun9-86.userapi.com/impg/XVv7ulxMNp1RW665uBvdTrSiiZIYzlX5yK09QQ/8WIDYQpGVV8.jpg?size=1080x1440&quality=95&sign=57af9f7214e6f0ea296125edf0f1c266&type=album",
+      "Евгений",
+      "Самусенко",
+      "+375298740491",
+      "eugen1",
+      "1234");
   CurrentUser currentUser = CurrentUser();
 
   int _selectedIndex = 0;
@@ -19,13 +25,17 @@ class BottomNavMenu extends State<StatefulWidget> {
 
   static const List<Widget> _navMenuAppBarItems = <Widget>[
     Text('Catalog'),
-    TextField(decoration: InputDecoration(
+    TextField(
+      cursorColor: Colors.green,
+      decoration: InputDecoration(
         icon: Icon(Icons.search),
         hintText: 'Search',
         border: UnderlineInputBorder(),
+        focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.green)),
         fillColor: Colors.white,
         filled: true
-    ),),
+      ),
+    ),
     Text('Profile')
   ];
 

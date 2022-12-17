@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../Login.dart';
+import '../sign_in.dart';
 import '../OptionPages/cart_page.dart';
 import '../OptionPages/contacts_page.dart';
 import '../OptionPages/current_orders_page.dart';
@@ -34,7 +34,7 @@ class _ProfileState extends State<Profile> {
             Container(
               width: 0.6 * profileTileSize,
               height: profileTileSize,
-              child: Image.network(currentUser.user!.profileImage, fit: BoxFit.scaleDown),
+              child: Image.network(currentUser.user!.profileImage, fit: BoxFit.cover),
             ),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -69,7 +69,7 @@ class _ProfileState extends State<Profile> {
   ];
 
   final List<Widget> _pages = <Widget>[
-    Login(),
+    SignIn(),
     CartPage(),
     CurrentOrders(),
     Favorites(),
