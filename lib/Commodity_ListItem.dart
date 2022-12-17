@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_app/CommodityPage.dart';
+import 'package:flutter_app/kotlin/main/classes/items/Item';
 
 class Commodity_ListItem extends StatelessWidget {
   String image_path = "lib/Example_Images/image_standart.png";
