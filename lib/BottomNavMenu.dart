@@ -3,8 +3,19 @@ import 'package:flutter_app/HomePages/Catalog.dart';
 import 'package:flutter_app/HomePages/Profile.dart';
 import 'package:flutter_app/HomePages/Search.dart';
 
+import 'CurrentUser.dart';
+import 'User.dart';
+
 class BottomNavMenu extends State<StatefulWidget> {
+
+  User nonExistentPerson = User("https://proza.ru/photos/ibis2.jpg", "Евгений", "Самусенко", "+375298740491", "eugen1", "1234");
+  CurrentUser currentUser = CurrentUser();
+
   int _selectedIndex = 0;
+
+  //BottomNavMenu() {
+  //  currentUser = CurrentUser.getCurrentUser(nonExistentPerson)!;
+  //}
 
   static const List<Widget> _navMenuAppBarItems = <Widget>[
     Text('Catalog'),
@@ -18,7 +29,7 @@ class BottomNavMenu extends State<StatefulWidget> {
     Text('Profile')
   ];
 
-  static List<Widget> _navMenuBodyItems = <Widget>[
+  static final List<Widget> _navMenuBodyItems = <Widget>[
     Catalog(),
     Search(),
     Profile()
@@ -32,6 +43,9 @@ class BottomNavMenu extends State<StatefulWidget> {
 
   @override
   Widget build(BuildContext context) {
+
+    currentUser.setUser(nonExistentPerson);
+
     return Scaffold(
       appBar: AppBar(
         title: _navMenuAppBarItems.elementAt(_selectedIndex),
@@ -55,7 +69,7 @@ class BottomNavMenu extends State<StatefulWidget> {
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.amber[800],
+        selectedItemColor: Colors.amberAccent,
         onTap: _onItemTapped,
       ),
     );

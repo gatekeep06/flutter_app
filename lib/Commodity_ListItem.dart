@@ -2,18 +2,14 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_app/CommodityPage.dart';
-import 'package:flutter_app/kotlin/main/classes/items/Item';
+//import 'package:flutter_app/kotlin/main/classes/items/Item';
 
 class Commodity_ListItem extends StatelessWidget {
   String image_path = "lib/Example_Images/image_standart.png";
   String commodity_name = "Danik";
   int cost = 666;
 
-  Commodity_ListItem(String image_path, String commodity_name, int cost, {super.key}) {
-    this.image_path = image_path;
-    this.commodity_name = commodity_name;
-    this.cost = cost;
-  }
+  Commodity_ListItem(this.image_path, this.commodity_name, this.cost, {super.key});
 
   @override
   Widget build(BuildContext context) {
