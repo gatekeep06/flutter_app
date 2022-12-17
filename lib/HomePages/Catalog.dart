@@ -1,13 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/Commodity_ListItem.dart';
+
+import '../commodity_element.dart';
 
 class Catalog extends StatelessWidget {
+  const Catalog({super.key});
+
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
         itemBuilder: (context, index) {
-          return Commodity_ListItem("lib/Example_Images/image_standart.png", "Danik $index", 666);
+          return CommodityElement("lib/Example_Images/image_standart.png", "Danik $index", 666);
         },
 
     );

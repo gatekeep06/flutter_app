@@ -1,18 +1,14 @@
-import 'dart:js';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_app/BottomNavMenu.dart';
-import 'package:flutter_app/CurrentUser.dart';
-import 'package:flutter_app/Login.dart';
-import 'package:flutter_app/OptionPages/CartPage.dart';
-import 'package:flutter_app/OptionPages/ContactsPage.dart';
-import 'package:flutter_app/OptionPages/CurrentOrdersPage.dart';
-import 'package:flutter_app/OptionPages/FavoritesPage.dart';
-import 'package:flutter_app/OptionPages/HelpPage.dart';
-import 'package:flutter_app/OptionPages/HistoryPage.dart';
-import 'package:flutter_app/OptionPages/InfoPage.dart';
 
-import '../User.dart';
+import '../Login.dart';
+import '../OptionPages/cart_page.dart';
+import '../OptionPages/contacts_page.dart';
+import '../OptionPages/current_orders_page.dart';
+import '../OptionPages/favorites_page.dart';
+import '../OptionPages/help_page.dart';
+import '../OptionPages/history_page.dart';
+import '../OptionPages/info_page.dart';
+import '../current_user.dart';
 
 class Profile extends StatefulWidget {
 

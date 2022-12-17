@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/BottomNavMenu.dart';
+
+import 'bottom_nav_menu.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});

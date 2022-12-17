@@ -1,15 +1,15 @@
-import 'package:flutter_app/Commodity_ListItem.dart';
+import 'package:flutter_app/commodity_element.dart';
 
 class Cart {
 
   static final Cart cart = Cart._internal();
-  List<Commodity_ListItem> list = <Commodity_ListItem>[];
+  List<CommodityElement> list = <CommodityElement>[];
 
   factory Cart() => cart;
 
   Cart._internal();
 
-  addToCart(Commodity_ListItem item) {
+  addToCart(CommodityElement item) {
     list.add(item);
   }
 
