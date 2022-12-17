@@ -23,9 +23,9 @@ class Commodity_ListItem extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Container(
-            child: Image.asset(image_path, fit: BoxFit.scaleDown),
             width: 75,
             height: 75,
+            child: Image.asset(image_path, fit: BoxFit.scaleDown),
           ),
           Text(commodity_name),
           Text('$cost \$'),
