@@ -19,10 +19,6 @@ class BottomNavMenu extends State<StatefulWidget> {
 
   int _selectedIndex = 0;
 
-  //BottomNavMenu() {
-  //  currentUser = CurrentUser.getCurrentUser(nonExistentPerson)!;
-  //}
-
   static const List<Widget> _navMenuAppBarItems = <Widget>[
     Text('Catalog'),
     TextField(

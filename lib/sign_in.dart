@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_app/sign_up.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({Key? key}) : super(key: key);
@@ -26,7 +27,7 @@ class _SignInState extends State<SignIn> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Log In'),
+        title: const Text('Sign In'),
       ),
       body: Container(
         alignment: Alignment.center,
@@ -66,18 +67,18 @@ class _SignInState extends State<SignIn> {
                 ],
               ),
               Padding(
-                  padding: EdgeInsets.symmetric(vertical: 30),
+                  padding: const EdgeInsets.symmetric(vertical: 30),
                   child: ElevatedButton(
                     onPressed: _togglePasswordVisibility,
-                    child: Text('Sign In')
+                    child: const Text('Sign In')
                   ),
               ),
               Padding(
-                  padding: EdgeInsets.symmetric(vertical: 40),
-                  child: ElevatedButton(
-                    onPressed: _togglePasswordVisibility,
-                    child: Text('Sign Up'),
-                  ),
+                  padding: const EdgeInsets.symmetric(vertical: 40),
+                  child: InkWell(
+                    child: const Text('Sign Up', style: TextStyle(color: Colors.blueAccent, decoration: TextDecoration.underline)),
+                    onTap: () {Navigator.push(context, MaterialPageRoute(builder: (context) => SignUp()));},
+                  )
               )
             ],
           ),

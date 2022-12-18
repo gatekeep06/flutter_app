@@ -4,16 +4,17 @@ import 'package:flutter/material.dart';
 import 'commodity_page.dart';
 
 class CommodityElement extends StatelessWidget {
-  String image_path = "lib/Example_Images/image_standart.png";
-  String commodity_name = "Danik";
-  int cost = 666;
 
-  CommodityElement(this.image_path, this.commodity_name, this.cost, {super.key});
+  final String imagePath;
+  final String commodityName;
+  final int cost;
+
+  const CommodityElement(this.imagePath, this.commodityName, this.cost, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 2),
+      padding: const EdgeInsets.symmetric(vertical: 2),
       child: InkWell(
       child: Row(
         children: [
@@ -21,9 +22,9 @@ class CommodityElement extends StatelessWidget {
             alignment: Alignment.topLeft,
             width: 150,
             height: 150,
-            child: Image.network(image_path, fit: BoxFit.cover),
+            child: Image.network(imagePath, fit: BoxFit.cover),
           ),
-          Text(commodity_name),
+          Text(commodityName),
           Text('$cost \$'),
         ],
       ),
