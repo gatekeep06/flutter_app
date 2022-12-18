@@ -16,11 +16,11 @@ class CommodityElement extends StatelessWidget {
       padding: EdgeInsets.symmetric(vertical: 2),
       child: InkWell(
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Container(
-            width: 75,
-            height: 75,
+            alignment: Alignment.topLeft,
+            width: 150,
+            height: 150,
             child: Image.network(image_path, fit: BoxFit.cover),
           ),
           Text(commodity_name),
