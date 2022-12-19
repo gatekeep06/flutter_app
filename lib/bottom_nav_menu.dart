@@ -21,15 +21,7 @@ class BottomNavMenu extends State<StatefulWidget> {
 
   static const List<Widget> _navMenuAppBarItems = <Widget>[
     Text('Catalog'),
-    TextField(
-      decoration: InputDecoration(
-        suffixIcon: Icon(Icons.search),
-        hintText: 'Search',
-        border: UnderlineInputBorder(),
-        fillColor: Colors.white,
-        filled: true
-      ),
-    ),
+    Text('Search'),
     Text('Profile')
   ];
 

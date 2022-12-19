@@ -13,9 +13,9 @@ class _SignInState extends State<SignIn> {
 
   bool obscureText = true;
   bool switchButtonValue = false;
+
   TextEditingController textControllerForLogin = TextEditingController();
   TextEditingController textControllerForPassword = TextEditingController();
-  FilteringTextInputFormatter loginFilter = FilteringTextInputFormatter.deny(' ', replacementString: '_');
 
   _togglePasswordVisibility() {
     setState(() {
@@ -36,17 +36,15 @@ class _SignInState extends State<SignIn> {
             children: [
               TextField(
                 controller: textControllerForLogin,
-                maxLength: 12,
-                inputFormatters: [loginFilter],
                 decoration: const InputDecoration(
                     hintText: 'Login',
                     border: OutlineInputBorder()
                 ),
               ),
+              const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
               TextField(
                 controller: textControllerForPassword,
                 obscureText: obscureText,
-                maxLength: 12,
                 decoration: InputDecoration(
                     hintText: 'Password',
                     border: const OutlineInputBorder(),
