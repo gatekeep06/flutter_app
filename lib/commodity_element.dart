@@ -9,6 +9,7 @@ class CommodityElement extends StatelessWidget {
 
 
 
+
   String commodity_name;
   String description;
   double price;
@@ -24,18 +25,25 @@ class CommodityElement extends StatelessWidget {
 
 
 
+=======
+  final String imagePath;
+  final String commodityName;
+  final int cost;
+
+  const CommodityElement(this.imagePath, this.commodityName, this.cost, {super.key});
+
 
   @override
   Widget build(BuildContext context) {
     var _item=  CommodityElement(_itemName,_description,_price,_imagePath);
     price = _item.price;
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 2),
+      padding: const EdgeInsets.symmetric(vertical: 2),
       child: InkWell(
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Container(
+
             width: 75,
             height: 75,
             child: Image.asset(_item.image_path, fit: BoxFit.scaleDown),
@@ -43,6 +51,15 @@ class CommodityElement extends StatelessWidget {
           Text(_item.commodity_name),
 
           Text('$price \$'),
+=======
+            alignment: Alignment.topLeft,
+            width: 150,
+            height: 150,
+            child: Image.network(imagePath, fit: BoxFit.cover),
+          ),
+          Text(commodityName),
+          Text('$cost \$'),
+
         ],
       ),
       onTap: () {
