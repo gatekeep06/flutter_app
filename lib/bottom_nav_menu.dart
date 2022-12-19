@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'HomePages/Catalog.dart';
-import 'HomePages/Profile.dart';
-import 'HomePages/Search.dart';
+import 'HomePages/catalog.dart';
+import 'HomePages/profile/profile.dart';
+import 'HomePages/search.dart';
 import 'current_user.dart';
 import 'user.dart';
 

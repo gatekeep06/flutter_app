@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-
-import '../sign_in.dart';
-import '../OptionPages/cart_page.dart';
-import '../OptionPages/contacts_page.dart';
-import '../OptionPages/current_orders_page.dart';
-import '../OptionPages/favorites_page.dart';
-import '../OptionPages/help_page.dart';
-import '../OptionPages/history_page.dart';
-import '../OptionPages/info_page.dart';
-import '../current_user.dart';
+import 'package:flutter_app/HomePages/profile/profile_settings_page.dart';
+import 'package:flutter_app/HomePages/profile/sign_in.dart';
+import '../../OptionPages/cart_page.dart';
+import '../../OptionPages/contacts_page.dart';
+import '../../OptionPages/current_orders_page.dart';
+import '../../OptionPages/favorites_page.dart';
+import '../../OptionPages/help_page.dart';
+import '../../OptionPages/history_page.dart';
+import '../../OptionPages/info_page.dart';
+import '../../current_user.dart';
 
 class Profile extends StatefulWidget {
 
@@ -24,7 +24,16 @@ class _ProfileState extends State<Profile> {
 
   CurrentUser currentUser = CurrentUser();
 
-  Widget createProfileTile() {
+  Widget _createPage() {
+    if (currentUser.isEntered) {
+      return ProfileSettingsPage();
+    }
+    else {
+      return SignIn();
+    }
+  }
+
+  Widget _createProfileTile() {
     if (currentUser.isEntered) {
       return Container(
         height: profileTileSize,
@@ -68,8 +77,8 @@ class _ProfileState extends State<Profile> {
     Text('Info')
   ];
 
-  final List<Widget> _pages = <Widget>[
-    SignIn(),
+  List<Widget> _pages = <Widget>[
+    Container(),
     CartPage(),
     CurrentOrders(),
     Favorites(),
@@ -82,7 +91,8 @@ class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
 
-    _listItems[0] = createProfileTile();
+    _listItems[0] = _createProfileTile();
+    _pages[0] = _createPage();
 
     return ListView.builder(
         itemBuilder: (context, index) => ListTile(
