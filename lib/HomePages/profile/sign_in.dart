@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app/HomePages/profile/sign_up.dart';
+import 'package:flutter_app/current_user.dart';
+
+import '../../home.dart';
+import '../../user.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({Key? key}) : super(key: key);
@@ -10,6 +14,14 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
+
+  User nonExistentPerson = User(
+      "https://sun9-86.userapi.com/impg/XVv7ulxMNp1RW665uBvdTrSiiZIYzlX5yK09QQ/8WIDYQpGVV8.jpg?size=1080x1440&quality=95&sign=57af9f7214e6f0ea296125edf0f1c266&type=album",
+      "Евгений",
+      "Самусенко",
+      "+375298740491",
+      "eugen1",
+      "1234");
 
   bool obscureText = true;
   bool switchButtonValue = false;
@@ -21,6 +33,21 @@ class _SignInState extends State<SignIn> {
     setState(() {
       obscureText = !obscureText;
     });
+  }
+
+  _doSignIn() {
+    if (textControllerForLogin.text == nonExistentPerson.login && textControllerForPassword.text == nonExistentPerson.password) {
+      CurrentUser currentUser = CurrentUser();
+      currentUser.setUser(User(
+          nonExistentPerson.profileImage,
+          nonExistentPerson.firstName,
+          nonExistentPerson.lastName,
+          nonExistentPerson.telNumber,
+          nonExistentPerson.login,
+          nonExistentPerson.password));
+      Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
+    }
+
   }
 
   @override
@@ -67,7 +94,7 @@ class _SignInState extends State<SignIn> {
               Padding(
                   padding: const EdgeInsets.symmetric(vertical: 30),
                   child: ElevatedButton(
-                    onPressed: _togglePasswordVisibility,
+                    onPressed: _doSignIn,
                     child: const Text('Sign In')
                   ),
               ),

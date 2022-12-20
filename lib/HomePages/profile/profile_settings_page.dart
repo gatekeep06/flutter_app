@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/HomePages/profile/profile.dart';
 import 'package:flutter_app/current_user.dart';
+import 'package:flutter_app/home.dart';
 
 class ProfileSettingsPage extends StatefulWidget {
   const ProfileSettingsPage({Key? key}) : super(key: key);
@@ -26,10 +28,16 @@ class _ProfileSettingsPageState extends State<ProfileSettingsPage> {
               InkWell(
                 child: Icon(Icons.edit),
               ),
-              Align(
-                alignment: Alignment.topRight,
-                child: InkWell(
-                    child: Icon(Icons.exit_to_app)
+              Expanded(
+                child: Align(
+                  alignment: Alignment.topRight,
+                  child: InkWell(
+                      child: Icon(Icons.exit_to_app),
+                      onTap: () {
+                        currentUser.delUser();
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
+                      }
+                  )
                 )
               )
             ],

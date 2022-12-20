@@ -24,8 +24,8 @@ class _ProfileState extends State<Profile> {
 
   CurrentUser currentUser = CurrentUser();
 
-  Widget _createPage() {
-    if (currentUser.isEntered) {
+  Widget _createPage(valid) {
+    if (valid) {
       return ProfileSettingsPage();
     }
     else {
@@ -33,8 +33,8 @@ class _ProfileState extends State<Profile> {
     }
   }
 
-  Widget _createProfileTile() {
-    if (currentUser.isEntered) {
+  Widget _createProfileTile(valid) {
+    if (valid) {
       return Container(
         height: profileTileSize,
         child: Row(
@@ -88,18 +88,24 @@ class _ProfileState extends State<Profile> {
     Info()
   ];
 
+  void profileStateCreater(valid) {
+    setState(() {
+      _listItems[0] = _createProfileTile(valid);
+      _pages[0] = _createPage(valid);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
 
-    _listItems[0] = _createProfileTile();
-    _pages[0] = _createPage();
+    profileStateCreater(currentUser.isEntered);
 
     return ListView.builder(
+        itemCount: _listItems.length,
         itemBuilder: (context, index) => ListTile(
           title:_listItems[index],
           onTap: () {Navigator.push(context, MaterialPageRoute(builder: (context) => _pages[index]));},
-        ),
-        itemCount: _listItems.length
+        )
     );
   }
 }
