@@ -20,8 +20,8 @@ class _CartPageState extends State<CartPage> {
     String _description = "This is Danik";
     double _price = 666.0;
     String _imagePath = "lib/Example_Images/image_standart.png";
-    cart.addToCart(CommodityElement(_itemName,_description,_price,_imagePath));
-    cart.addToCart(CommodityElement(_itemName,_description,_price,_imagePath));
+    //cart.addToCart(CommodityElement());
+    //cart.addToCart(CommodityElement());
     return Scaffold(
       appBar: AppBar(title: Text('Cart')),
       body: ListView.builder(

@@ -2,57 +2,48 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_app/get_item.dart';
 import 'commodity_page.dart';
 
 class CommodityElement extends StatelessWidget {
 
-  String commodity_name;
-  String description;
-  double price;
-  String image_path;
+  final String _itemName;
+  final String _description;
+  final double _price;
+  final String _imagePath;
 
-  CommodityElement(this.commodity_name, this.description, this.price, this.image_path, {super.key});
-
-
-  String _itemName = "Danik";
-  String _description = "This is Danik";
-  double _price = 666.0;
-  String _imagePath = "lib/Example_Images/image_standart.png";
-
+  const CommodityElement(this._itemName, this._description, this._price, this._imagePath, {super.key});
 
   @override
   Widget build(BuildContext context) {
-    var _item=  CommodityElement(_itemName,_description,_price,_imagePath);
-    price = _item.price;
+
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 2),
-      child: InkWell(
-      child: Row(
-        children: [
-          Container(
-            alignment: Alignment.center,
-            width: 75,
-            height: 75,
-            child: Image.network(_item.image_path, fit: BoxFit.cover),
-          ),
-          Column(
+        padding: const EdgeInsets.symmetric(vertical: 2),
+        child: InkWell(
+          child: Row(
             children: [
-              Text(_item.commodity_name),
-              Text(_item.description)
+              Container(
+                alignment: Alignment.center,
+                width: 75,
+                height: 75,
+                child: Image.network(_imagePath, fit: BoxFit.cover),
+              ),
+              Column(
+                children: [
+                  Text(_itemName),
+                  Text(_description)
+                ],
+              ),
+              Align(
+                  alignment: Alignment.bottomRight,
+                  child:  Text('$_price \$')
+              )
             ],
           ),
-          Align(
-            alignment: Alignment.bottomRight,
-            child:  Text('$price \$')
-          )
-        ],
-      ),
-      onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => CommodityPage()));
-      },
-      )
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) => CommodityPage()));
+          },
+        )
     );
   }
-
 }
+
