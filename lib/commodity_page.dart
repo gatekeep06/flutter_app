@@ -27,7 +27,7 @@ class _CommodityPageState extends State<CommodityPage> {
   Future<void> _getItemName() async {
     String result;
     try {
-      result = await platform.invokeMethod('getItemName');
+      result = await platform.invokeMethod('getItemName', {"itemId": itemId});
     } on PlatformException catch (e) {
       result = "Failed to get item name: '${e.message}'.";
     }
@@ -40,7 +40,7 @@ class _CommodityPageState extends State<CommodityPage> {
   Future<void> _getDescription() async {
     String result;
     try {
-      result = await platform.invokeMethod('getDescription');
+      result = await platform.invokeMethod('getDescription', {"itemId": itemId});
     } on PlatformException catch (e) {
       result = "Failed to get item description: '${e.message}'.";
     }
@@ -53,7 +53,7 @@ class _CommodityPageState extends State<CommodityPage> {
   Future<void> _getItemPrice() async {
     double result;
     try {
-      result = await platform.invokeMethod('getItemPrice');
+      result = await platform.invokeMethod('getItemPrice', {"itemId": itemId});
     } on PlatformException catch (e) {
       result = 0;
     }
@@ -66,7 +66,7 @@ class _CommodityPageState extends State<CommodityPage> {
   Future<void> _getImagePath() async {
     String result;
     try {
-      result = await platform.invokeMethod('getImagePath');
+      result = await platform.invokeMethod('getImagePath', {"itemId": itemId});
     } on PlatformException catch (e) {
       result = "Failed to get item image path: '${e.message}'.";
     }

@@ -22,19 +22,19 @@ class MainActivity : FlutterActivity() {
                 result.success(itemPart)
             };
             if (call.method == "getDescription") {
-                val itemPart = Constants.locItem.description
+                val itemPart = list[call.argument("itemId")!!].description
                 result.success(itemPart)
             };
             if (call.method == "getItemPrice") {
-                val itemPart = Constants.locItem.price
+                val itemPart = list[call.argument("itemId")!!].price
                 result.success(itemPart)
             };
             if (call.method == "getImagePath") {
-                val itemPart = Constants.locItem.imagePath
+                val itemPart = list[call.argument("itemId")!!].imagePath
                 result.success(itemPart)
             };
             if (call.method == "getCatalogSize") {
-                val catalogSize = 2
+                val catalogSize = list.size
                 result.success(catalogSize)
             };
             if (call.method == "searchItemsByName") {

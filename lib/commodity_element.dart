@@ -21,7 +21,6 @@ class _CommodityElementState extends State<CommodityElement> {
 
   int itemId;
   String _itemName = "error";
-  String _description = "error";
   double _price = 0;
   String _imagePath = "error";
 
@@ -40,23 +39,10 @@ class _CommodityElementState extends State<CommodityElement> {
     });
   }
 
-  Future<void> _getDescription() async {
-    String result;
-    try {
-      result = await platform.invokeMethod('getDescription', {'itemId': itemId});
-    } on PlatformException catch (e) {
-      result = "Failed to get item description: '${e.message}'.";
-    }
-
-    setState(() {
-      _description = result;
-    });
-  }
-
   Future<void> _getItemPrice() async {
     double result;
     try {
-      result = await platform.invokeMethod('getItemPrice');
+      result = await platform.invokeMethod('getItemPrice', {"itemId": itemId});
     } on PlatformException catch (e) {
       result = 0;
     }
@@ -69,7 +55,7 @@ class _CommodityElementState extends State<CommodityElement> {
   Future<void> _getImagePath() async {
     String result;
     try {
-      result = await platform.invokeMethod('getImagePath');
+      result = await platform.invokeMethod('getImagePath', {"itemId": itemId});
     } on PlatformException catch (e) {
       result = "Failed to get item image path: '${e.message}'.";
     }
@@ -83,7 +69,6 @@ class _CommodityElementState extends State<CommodityElement> {
   void initState() {
     super.initState();
     _getItemName();
-    _getDescription();
     _getItemPrice();
     _getImagePath();
   }
