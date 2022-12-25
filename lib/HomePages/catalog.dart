@@ -19,59 +19,7 @@ class _CatalogState extends State<Catalog> {
   String _description = "error";
   double _price = 0;
   String _imagePath = "error";
-  int _catalogSize = 1;
-
-  Future<void> _getItemName() async {
-    String result;
-    try {
-      result = await platform.invokeMethod('getItemName');
-    } on PlatformException catch (e) {
-      result = "Failed to get item name: '${e.message}'.";
-    }
-
-    setState(() {
-      _itemName = result;
-    });
-  }
-
-  Future<void> _getDescription() async {
-    String result;
-    try {
-      result = await platform.invokeMethod('getDescription');
-    } on PlatformException catch (e) {
-      result = "Failed to get item description: '${e.message}'.";
-    }
-
-    setState(() {
-      _description = result;
-    });
-  }
-
-  Future<void> _getItemPrice() async {
-    double result;
-    try {
-      result = await platform.invokeMethod('getItemPrice');
-    } on PlatformException catch (e) {
-      result = 0;
-    }
-
-    setState(() {
-      _price = result;
-    });
-  }
-
-  Future<void> _getImagePath() async {
-    String result;
-    try {
-      result = await platform.invokeMethod('getImagePath');
-    } on PlatformException catch (e) {
-      result = "Failed to get item image path: '${e.message}'.";
-    }
-
-    setState(() {
-      _imagePath = result;
-    });
-  }
+  int _catalogSize = 2;
   
   Future<void> _getCatalogSize() async {
     int result;
@@ -87,18 +35,18 @@ class _CatalogState extends State<Catalog> {
   }
 
   @override
-  Widget build(BuildContext context) {
-
+  void initState() {
+    super.initState();
     _getCatalogSize();
+  }
+
+  @override
+  Widget build(BuildContext context) {
 
     return ListView.builder(
       itemCount: _catalogSize,
-      itemBuilder: (context, index) {
-        _getItemName();
-        _getDescription();
-        _getItemPrice();
-        _getImagePath();
-        return CommodityElement(_itemName, _description, _price, _imagePath);
+      itemBuilder: (context, id) {
+        return CommodityElement(itemId: id);
       },
     );
   }

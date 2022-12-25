@@ -27,7 +27,7 @@ class _CartPageState extends State<CartPage> {
       body: ListView.builder(
           itemCount: cart.list.length,
           itemBuilder: (context, index) {
-            return cart.list[index];
+            return CommodityElement(itemId: cart.list[index]);
           }
       ),
     );

@@ -11,7 +11,7 @@ import io.flutter.plugin.common.MethodChannel
 class MainActivity : FlutterActivity() {
     private val PATH = "samples.flutter_app.dev/item"
 
-    override fun configureFlutterEngine(@NonNull flutterEngine: FlutterEngine) {
+    override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
         MethodChannel(flutterEngine.dartExecutor.binaryMessenger, PATH).setMethodCallHandler { call, result ->
             if (call.method == "getItemName") {
@@ -31,7 +31,7 @@ class MainActivity : FlutterActivity() {
                 result.success(itemPart)
             };
             if (call.method == "getCatalogSize") {
-                var catalogSize = 5
+                var catalogSize = 2
                 result.success(catalogSize)
             };
             else {
