@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/HomePages/profile/profile_settings_page.dart';
 import 'package:flutter_app/HomePages/profile/sign_in.dart';
+import 'package:flutter_app/OptionPages/favorites_page.dart';
 import '../../OptionPages/cart_page.dart';
 import '../../OptionPages/contacts_page.dart';
 import '../../OptionPages/current_orders_page.dart';
-import '../../OptionPages/favorites_page.dart';
 import '../../OptionPages/help_page.dart';
 import '../../OptionPages/history_page.dart';
 import '../../OptionPages/info_page.dart';
@@ -19,7 +19,7 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
-  
+
   double profileTileSize = 200;
 
   CurrentUser currentUser = CurrentUser();
@@ -58,30 +58,31 @@ class _ProfileState extends State<Profile> {
     }
     else {
       return Container(
-        height: 200,
+        padding: EdgeInsets.all(20),
+        margin: EdgeInsets.all(40),
         alignment: Alignment.center,
-        child: Text('Sign In'),
-        color: Colors.blueAccent,
+        child: Text('Sign In', style: TextStyle(color: Colors.white, fontSize: 30)),
+        decoration: BoxDecoration(color: Colors.blueAccent, borderRadius: BorderRadius.all(Radius.circular(20))),
       );
     }
   }
 
   List<Widget> _listItems = <Widget>[
     Container(),
-    Text('Cart'),
-    Text('Current orders'),
-    Text('Favorites'),
-    Text('History'),
-    Text('Contacts'),
-    Text('Help'),
-    Text('Info')
+    Text('Cart', style: TextStyle(fontSize: 20)),
+    Text('Current orders', style: TextStyle(fontSize: 20)),
+    Text('Favorites', style: TextStyle(fontSize: 20)),
+    Text('History', style: TextStyle(fontSize: 20)),
+    Text('Contacts', style: TextStyle(fontSize: 20)),
+    Text('Help', style: TextStyle(fontSize: 20)),
+    Text('Info', style: TextStyle(fontSize: 20))
   ];
 
   List<Widget> _pages = <Widget>[
     Container(),
     CartPage(),
     CurrentOrders(),
-    Favorites(),
+    FavoritesPage(),
     History(),
     Contacts(),
     Help(),
@@ -103,8 +104,11 @@ class _ProfileState extends State<Profile> {
     return ListView.builder(
         itemCount: _listItems.length,
         itemBuilder: (context, index) => ListTile(
-          title:_listItems[index],
-          onTap: () {Navigator.push(context, MaterialPageRoute(builder: (context) => _pages[index]));},
+          title: Container(
+              decoration: BoxDecoration(border: Border(bottom: BorderSide(width: 1))),
+              child: _listItems[index]
+          ),
+          onTap: () { Navigator.push(context, MaterialPageRoute(builder: (context) => _pages[index])); },
         )
     );
   }

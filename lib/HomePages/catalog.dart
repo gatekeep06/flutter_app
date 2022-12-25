@@ -15,10 +15,6 @@ class _CatalogState extends State<Catalog> {
 
   static const platform = MethodChannel('samples.flutter_app.dev/item');
 
-  String _itemName = "error";
-  String _description = "error";
-  double _price = 0;
-  String _imagePath = "error";
   int _catalogSize = 2;
   
   Future<void> _getCatalogSize() async {

@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_app/favorites.dart';
 import 'commodity_page.dart';
 
 class CommodityElement extends StatefulWidget {
@@ -29,7 +30,7 @@ class _CommodityElementState extends State<CommodityElement> {
   Future<void> _getItemName() async {
     String result;
     try {
-      result = await platform.invokeMethod('getItemName');
+      result = await platform.invokeMethod('getItemName', {'itemId': itemId});
     } on PlatformException catch (e) {
       result = "Failed to get item name: '${e.message}'.";
     }
@@ -42,7 +43,7 @@ class _CommodityElementState extends State<CommodityElement> {
   Future<void> _getDescription() async {
     String result;
     try {
-      result = await platform.invokeMethod('getDescription');
+      result = await platform.invokeMethod('getDescription', {'itemId': itemId});
     } on PlatformException catch (e) {
       result = "Failed to get item description: '${e.message}'.";
     }
@@ -89,6 +90,8 @@ class _CommodityElementState extends State<CommodityElement> {
 
   @override
   Widget build(BuildContext context) {
+    
+    Favorites favorites = Favorites();
 
     return Container(
         padding: EdgeInsets.symmetric(vertical: 2),
@@ -108,8 +111,16 @@ class _CommodityElementState extends State<CommodityElement> {
                   Text(_itemName),
                   Expanded(
                       child: Align(
-                          alignment: Alignment.bottomRight,
-                          child:  Text('$_price \$')
+                        alignment: Alignment.topRight,
+                        child: Column(
+                            children: [
+                              IconButton(
+                                  onPressed: () { setState(() {}); favorites.isInFavorites(itemId) ? favorites.removeFromFavorites(itemId) : favorites.addToFavorites(itemId); },
+                                  icon: favorites.isInFavorites(itemId) ? Icon(Icons.star) : Icon(Icons.star_border)
+                              ),
+                              Text('$_price \$')
+                            ]
+                        )
                       )
                   )
                 ],

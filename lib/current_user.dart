@@ -17,6 +17,7 @@ class CurrentUser {
 
   delUser() {
     isEntered = false;
+    user = null;
   }
 
 }

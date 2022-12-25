@@ -1,5 +1,3 @@
-import 'package:flutter_app/commodity_element.dart';
-
 class Cart {
 
   static final Cart cart = Cart._internal();
@@ -14,7 +12,7 @@ class Cart {
   }
 
   removeFromCart(int id) {
-    list.removeAt(id);
+    list.remove(id);
   }
 
   int getQuantityInCart(int id) {
@@ -26,4 +24,9 @@ class Cart {
     }
     return quantity;
   }
+
+  int getListSize() {
+    return list.length;
+  }
+
 }

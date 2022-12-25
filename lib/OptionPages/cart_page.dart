@@ -16,20 +16,14 @@ class _CartPageState extends State<CartPage> {
 
   @override
   Widget build(BuildContext context) {
-    String _itemName = "Danik";
-    String _description = "This is Danik";
-    double _price = 666.0;
-    String _imagePath = "lib/Example_Images/image_standart.png";
-    //cart.addToCart(CommodityElement());
-    //cart.addToCart(CommodityElement());
     return Scaffold(
       appBar: AppBar(title: Text('Cart')),
       body: ListView.builder(
-          itemCount: cart.list.length,
+          itemCount: cart.getListSize(),
           itemBuilder: (context, index) {
             return CommodityElement(itemId: cart.list[index]);
           }
-      ),
+      )
     );
   }
 }
