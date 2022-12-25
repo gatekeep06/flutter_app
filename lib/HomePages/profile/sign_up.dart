@@ -113,7 +113,7 @@ class _SignUpState extends State<SignUp> {
                   decoration: InputDecoration(
                       hintText: 'Login',
                       border: OutlineInputBorder(),
-                      errorText: isLoginCorrect ? null : "Login mast not contain spaces, use underline symbol instead"
+                      errorText: isLoginCorrect ? null : "Login must not contain spaces, use underline symbol instead"
                   ),
                 ),
                 const Padding(padding: EdgeInsets.symmetric(vertical: 10)),

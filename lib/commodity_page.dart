@@ -116,7 +116,7 @@ class _CommodityPageState extends State<CommodityPage> {
               decoration: BoxDecoration(color: Color.fromARGB(255, 255, 193, 7), borderRadius: BorderRadius.all(Radius.circular(20))),
               child: Align(
                   alignment: Alignment.centerLeft,
-                  child: Text('$_price \$', style: TextStyle(fontSize: 50))
+                  child: Text('$_price \$', style: TextStyle(fontSize: 50, color: Colors.white))
               )
             ),
             Padding(padding: EdgeInsets.symmetric(vertical: 15)),

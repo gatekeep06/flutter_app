@@ -40,8 +40,15 @@ class MainActivity : FlutterActivity() {
             if (call.method == "searchItemsByName") {
                 val resultList = mutableListOf<Int>()
                 for (i in list) {
-                    if (i.name.contains(call.argument<String>("searchString")!!)) {
+                    if (i.name.lowercase().contains(call.argument<String>("searchString")!!.lowercase())) {
                         resultList.add(list.indexOf(i))
+                    }
+                }
+                if (resultList.isEmpty()) {
+                    for (i in list) {
+                        if (i.description.lowercase().contains(call.argument<String>("searchString")!!.lowercase())) {
+                            resultList.add(list.indexOf(i))
+                        }
                     }
                 }
                 result.success(resultList)
