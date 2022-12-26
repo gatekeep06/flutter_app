@@ -40,14 +40,14 @@ class _CommodityElementState extends State<CommodityElement> {
               child: Row(
                 children: [
                   Container(
-                    padding: EdgeInsets.symmetric(vertical: 10),
+                    padding: EdgeInsets.all(20),
                     decoration: const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(10))),
                     alignment: Alignment.center,
                     width: 125,
                     height: 125,
                     child: Image.network(_imagePath, fit: BoxFit.scaleDown),
                   ),
-                  Text(_itemName),
+                  Text(_itemName, style: TextStyle(fontSize: 20)),
                   Expanded(
                       child: Align(
                         alignment: Alignment.topRight,
