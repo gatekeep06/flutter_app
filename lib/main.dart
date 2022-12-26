@@ -15,10 +15,6 @@ void main() {
 class MyApp extends StatelessWidget {
   MyApp({super.key});
 
-  bool isConnectionEstablished = true;
-  Favorites favorites = Favorites();
-  Cart cart = Cart();
-
   @override
   Widget build(BuildContext context) {
 

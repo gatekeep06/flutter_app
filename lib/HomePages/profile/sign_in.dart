@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app/HomePages/profile/sign_up.dart';
@@ -15,16 +16,9 @@ class SignIn extends StatefulWidget {
 
 class _SignInState extends State<SignIn> {
 
-  User nonExistentPerson = User(
-      "https://sun9-86.userapi.com/impg/XVv7ulxMNp1RW665uBvdTrSiiZIYzlX5yK09QQ/8WIDYQpGVV8.jpg?size=1080x1440&quality=95&sign=57af9f7214e6f0ea296125edf0f1c266&type=album",
-      "Евгений",
-      "Самусенко",
-      "+375298740491",
-      "eugen1",
-      "1234");
-
   bool obscureText = true;
   bool switchButtonValue = false;
+  bool isSignInFailed = false;
 
   TextEditingController textControllerForLogin = TextEditingController();
   TextEditingController textControllerForPassword = TextEditingController();
@@ -35,19 +29,26 @@ class _SignInState extends State<SignIn> {
     });
   }
 
-  _doSignIn() {
-    if (textControllerForLogin.text == nonExistentPerson.login && textControllerForPassword.text == nonExistentPerson.password) {
-      CurrentUser currentUser = CurrentUser();
-      currentUser.setUser(User(
-          nonExistentPerson.profileImage,
-          nonExistentPerson.firstName,
-          nonExistentPerson.lastName,
-          nonExistentPerson.telNumber,
-          nonExistentPerson.login,
-          nonExistentPerson.password));
-      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => Home()), (Route<dynamic> route) => false);
+  _doSignIn() async {
+    var db = (await FirebaseFirestore.instance.collection('users').get()).docs;
+    for (var i in db) {
+      if (i.get('login').toString() == textControllerForLogin.text && i.get('password').toString() == textControllerForPassword.text) {
+        CurrentUser currentUser = CurrentUser();
+        currentUser.setUser(User(
+          i.get('image_path'),
+          i.get('first_name'),
+          i.get('last_name'),
+          i.get('number'),
+          i.get('login'),
+          i.get('password')
+        ));
+        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => Home()), (Route<dynamic> route) => false);
+        break;
+      }
     }
-
+    setState(() {
+      isSignInFailed = true;
+    });
   }
 
   @override
@@ -62,8 +63,10 @@ class _SignInState extends State<SignIn> {
           child: Column(
             children: [
               TextField(
+                onChanged: (inputValue) { setState(() { isSignInFailed = false; }); },
                 controller: textControllerForLogin,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
+                    errorText: isSignInFailed ? "Sign In failed" : null,
                     hintText: 'Login',
                     border: OutlineInputBorder()
                 ),
