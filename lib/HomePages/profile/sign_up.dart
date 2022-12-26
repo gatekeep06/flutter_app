@@ -1,5 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_app/database_writer.dart';
+import 'package:flutter_app/user.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
@@ -53,6 +56,26 @@ class _SignUpState extends State<SignUp> {
     setState(() {
       isConfirmCorrect = valid;
     });
+  }
+
+  _doSignUp() async {
+    var db = (await FirebaseFirestore.instance.collection('users').get()).docs;
+    for (var i in db) {
+      if (i.get('login').toString() == textControllerForLogin.text || i.get('number').toString() == textControllerForTelNumber.text) {
+        setState(() {
+          setLoginCorrectness(false);
+          return;
+        });
+      }
+    }
+    DataBaseWriter().addToDB('users', {
+      'image_path': "https://cdn-images-1.medium.com/max/1200/1*5-aoK8IBmXve5whBQM90GA.png",
+      'first_name': textControllerForFirstName.text,
+      'last_name': textControllerForLastName.text,
+      'number': textControllerForTelNumber.text,
+      'login': textControllerForLogin.text,
+      'password': textControllerForPassword.text});
+    Navigator.pop(context);
   }
 
   @override
@@ -156,9 +179,9 @@ class _SignUpState extends State<SignUp> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 30),
+                  padding: EdgeInsets.symmetric(vertical: 30),
                   child: ElevatedButton(
-                      onPressed: _togglePasswordVisibility,
+                      onPressed: isLoginCorrect && isPasswordCorrect && isNumberCorrect && isConfirmCorrect ? _doSignUp : null,
                       child: const Text('Sign Up')
                   ),
                 ),

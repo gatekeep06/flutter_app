@@ -3,14 +3,12 @@ import 'package:flutter_app/user.dart';
 
 class DataBaseWriter {
 
-  addToDB(String table, var values) {
-    FirebaseFirestore.instance.collection(table).add(values);
-  }
-  
-  addUserAccountToDB(User user) {
-    addToDB('users', {'first_name': user.firstName, 'last_name': user.lastName, 'number': user.telNumber, 'login': user.login, 'password': user.password});
+  addToDB(String table, var values) async {
+    await FirebaseFirestore.instance.collection(table).add(values);
   }
 
-  //addFavoritesToDB(User user)
+  updateDB(String table, String itemId, String field, var values) async {
+    await FirebaseFirestore.instance.collection(table).doc(itemId).update({field: values});
+  }
 
 }

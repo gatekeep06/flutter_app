@@ -3,6 +3,7 @@ import 'favorites.dart';
 
 class User {
 
+  String userId;
   String profileImage;
   String firstName;
   String lastName;
@@ -10,6 +11,6 @@ class User {
   String login;
   String password;
 
-  User(this.profileImage, this.firstName, this.lastName, this.telNumber, this.login, this.password);
+  User(this.userId, this.profileImage, this.firstName, this.lastName, this.telNumber, this.login, this.password);
 
 }

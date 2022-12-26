@@ -35,6 +35,7 @@ class _SignInState extends State<SignIn> {
       if (i.get('login').toString() == textControllerForLogin.text && i.get('password').toString() == textControllerForPassword.text) {
         CurrentUser currentUser = CurrentUser();
         currentUser.setUser(User(
+          i.id,
           i.get('image_path'),
           i.get('first_name'),
           i.get('last_name'),

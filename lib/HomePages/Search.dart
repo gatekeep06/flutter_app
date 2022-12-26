@@ -59,7 +59,7 @@ class _SearchState extends State<Search> {
           }
       ),
       StreamBuilder(
-          stream: FirebaseFirestore.instance.collection('items').snapshots(),
+          stream: FirebaseFirestore.instance.collection('items2').snapshots(),
           builder: (context, snapshot) {
             if (snapshot.connectionState != ConnectionState.done &&
                 snapshot.connectionState != ConnectionState.active) {

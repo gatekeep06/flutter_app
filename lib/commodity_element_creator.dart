@@ -8,7 +8,7 @@ class CommodityElementCreator {
 
   Widget createCommodityElementByIdList(List idList) {
     return StreamBuilder(
-      stream: FirebaseFirestore.instance.collection('items').snapshots(),
+      stream: FirebaseFirestore.instance.collection('items2').snapshots(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done || snapshot.connectionState == ConnectionState.active) {
           if (idList.isEmpty) {

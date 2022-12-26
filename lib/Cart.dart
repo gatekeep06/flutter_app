@@ -1,3 +1,6 @@
+import 'current_user.dart';
+import 'database_writer.dart';
+
 class Cart {
 
   static final Cart cart = Cart._internal();
@@ -9,10 +12,16 @@ class Cart {
 
   addToCart(String id) {
     list.add(id);
+    if (CurrentUser().isEntered) {
+      DataBaseWriter().updateDB('users', CurrentUser().user!.userId, 'cart', list);
+    }
   }
 
   removeFromCart(String id) {
     list.remove(id);
+    if (CurrentUser().isEntered) {
+      DataBaseWriter().updateDB('users', CurrentUser().user!.userId, 'cart', list);
+    }
   }
 
   int getQuantityInCart(String id) {
