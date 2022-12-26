@@ -35,7 +35,7 @@ class _CommodityElementState extends State<CommodityElement> {
     Favorites favorites = Favorites();
 
     return Container(
-        padding: EdgeInsets.symmetric(vertical: 2),
+        padding: EdgeInsets.all(2),
         child: Container(
           decoration: const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(20)), color: Color.fromARGB(80, 178, 255, 89)),
           child: InkWell(

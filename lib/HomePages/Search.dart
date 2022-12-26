@@ -19,21 +19,29 @@ class _SearchState extends State<Search> {
   List searchResults = [];
   String selectedCategory = "none";
 
-  List<String> categories = <String>[
+  /*List<String> categories = <String>[
     'kitchen appliances',
     'decor',
     'household chemicals',
     'furniture',
     'misc',
+  ];*/
+  List<String> categories = <String>[
+    'ammunition',
+    'smoothbore weapon',
+    'hunting shoes',
+    'hunting clothes',
+    'rifle',
   ];
 
-  List<IconData> categoryIcons = <IconData>[
+  /*List<IconData> categoryIcons = <IconData>[
     Icons.soup_kitchen,
     Icons.deck,
     Icons.water_drop,
     Icons.table_restaurant,
     Icons.abc,
-  ];
+  ];*/
+
 
   void _setSearchState(int index) {
     setState(() {
@@ -49,7 +57,7 @@ class _SearchState extends State<Search> {
           itemBuilder: (context, index) {
             return ListTile(
               title: Text(categories[index]),
-              leading: Icon(categoryIcons[index]),
+              //leading: Icon(categoryIcons[index]),
               onTap: () {
                 setState(() {
                   selectedCategory = categories[index];
@@ -118,7 +126,7 @@ class _SearchState extends State<Search> {
           child: Scaffold(
               appBar: AppBar(title: Text(selectedCategory)),
               body: StreamBuilder(
-                  stream: FirebaseFirestore.instance.collection('items').snapshots(),
+                  stream: FirebaseFirestore.instance.collection('items2').snapshots(),
                   builder: (context, snapshot) {
                     searchResults.clear();
                     if (snapshot.connectionState != ConnectionState.done && snapshot.connectionState != ConnectionState.active) {

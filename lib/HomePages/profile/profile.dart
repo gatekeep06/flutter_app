@@ -81,9 +81,9 @@ class _ProfileState extends State<Profile> {
   List<Widget> _pages = <Widget>[
     Container(),
     CartPage(),
-    CurrentOrders(),
+    CurrentOrdersPage(),
     FavoritesPage(),
-    History(),
+    HistoryPage(),
     Contacts(),
     Help(),
     Info()
