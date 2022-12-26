@@ -69,7 +69,7 @@ class _ProfileState extends State<Profile> {
 
   List<Widget> _listItems = <Widget>[
     Container(),
-    Text('Cart', style: TextStyle(fontSize: 20)),
+    Padding(padding: EdgeInsets.only(top: 80), child: Text('Cart', style: TextStyle(fontSize: 20))),
     Text('Current orders', style: TextStyle(fontSize: 20)),
     Text('Favorites', style: TextStyle(fontSize: 20)),
     Text('History', style: TextStyle(fontSize: 20)),
@@ -89,7 +89,7 @@ class _ProfileState extends State<Profile> {
     Info()
   ];
 
-  void profileStateCreater(valid) {
+  void profileStateCreator(valid) {
     setState(() {
       _listItems[0] = _createProfileTile(valid);
       _pages[0] = _createPage(valid);
@@ -99,7 +99,7 @@ class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
 
-    profileStateCreater(currentUser.isEntered);
+    profileStateCreator(currentUser.isEntered);
 
     return ListView.builder(
         itemCount: _listItems.length,

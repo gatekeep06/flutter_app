@@ -4,86 +4,28 @@ import 'package:flutter_app/cart.dart';
 
 class CommodityPage extends StatefulWidget {
 
-  final int itemId;
+  final String itemId;
+  final String itemName;
+  final double price;
+  final String imagePath;
 
-  const CommodityPage({Key? key, required this.itemId}) : super(key: key);
+  const CommodityPage({Key? key, required this.itemId, required this.itemName, required this.price, required this.imagePath}) : super(key: key);
 
   @override
-  State<CommodityPage> createState() => _CommodityPageState(itemId);
+  State<CommodityPage> createState() => _CommodityPageState(itemId, itemName, price, imagePath);
 }
 
 class _CommodityPageState extends State<CommodityPage> {
 
   static const platform = MethodChannel('samples.flutter_app.dev/item');
 
-  int itemId;
-  String _itemName = "error";
-  String _description = "error";
-  double _price = 0;
-  String _imagePath = "error";
+  String itemId;
+  String _itemName;
+  String _description = "";
+  double _price;
+  String _imagePath;
 
-  _CommodityPageState(this.itemId);
-
-  Future<void> _getItemName() async {
-    String result;
-    try {
-      result = await platform.invokeMethod('getItemName', {"itemId": itemId});
-    } on PlatformException catch (e) {
-      result = "Failed to get item name: '${e.message}'.";
-    }
-
-    setState(() {
-      _itemName = result;
-    });
-  }
-
-  Future<void> _getDescription() async {
-    String result;
-    try {
-      result = await platform.invokeMethod('getDescription', {"itemId": itemId});
-    } on PlatformException catch (e) {
-      result = "Failed to get item description: '${e.message}'.";
-    }
-
-    setState(() {
-      _description = result;
-    });
-  }
-
-  Future<void> _getItemPrice() async {
-    double result;
-    try {
-      result = await platform.invokeMethod('getItemPrice', {"itemId": itemId});
-    } on PlatformException catch (e) {
-      result = 0;
-    }
-
-    setState(() {
-      _price = result;
-    });
-  }
-
-  Future<void> _getImagePath() async {
-    String result;
-    try {
-      result = await platform.invokeMethod('getImagePath', {"itemId": itemId});
-    } on PlatformException catch (e) {
-      result = "Failed to get item image path: '${e.message}'.";
-    }
-
-    setState(() {
-      _imagePath = result;
-    });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _getItemName();
-    _getDescription();
-    _getItemPrice();
-    _getImagePath();
-  }
+  _CommodityPageState(this.itemId, this._itemName, this._price, this._imagePath);
 
   @override
   Widget build(BuildContext context) {

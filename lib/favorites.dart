@@ -1,22 +1,24 @@
+import 'package:flutter/services.dart';
+
 class Favorites {
 
   static final Favorites favorites = Favorites._internal();
-  List<int> list = <int>[];
+  List<String> list = <String>[];
 
   factory Favorites() => favorites;
 
   Favorites._internal();
 
-  addToFavorites(int id) {
+  addToFavorites(String id) {
     list.add(id);
   }
 
-  removeFromFavorites(int id) {
+  removeFromFavorites(String id) {
     list.remove(id);
   }
 
-  bool isInFavorites(int id) {
-    for (int i in list) {
+  bool isInFavorites(String id) {
+    for (String i in list) {
       if (i == id) {
         return true;
       }
@@ -27,5 +29,4 @@ class Favorites {
   int getListSize() {
     return list.length;
   }
-
 }

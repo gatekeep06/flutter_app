@@ -1,37 +1,29 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
-import '../commodity_element.dart';
+import 'commodity_element.dart';
 
-class Catalog extends StatefulWidget {
-  const Catalog({Key? key}) : super(key: key);
+class CommodityElementCreator {
 
-  @override
-  State<Catalog> createState() => _CatalogState();
-}
-
-class _CatalogState extends State<Catalog> {
-
-  @override
-  Widget build(BuildContext context) {
+  Widget createCommodityElementByIdList(List idList) {
     return StreamBuilder(
       stream: FirebaseFirestore.instance.collection('items').snapshots(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done || snapshot.connectionState == ConnectionState.active) {
-          if (!snapshot.hasData) {
-            return Container(alignment: Alignment.center, child: Text('Catalog is empty'));
+          if (idList.isEmpty) {
+            return Container(
+                alignment: Alignment.center, child: Text('There doesn\'t seem to be anything here'));
           }
           else {
             return ListView.builder(
-                itemCount: snapshot.data!.docs.length,
+                itemCount: idList.length,
                 itemBuilder: (context, index) {
                   return CommodityElement(
-                      itemId: snapshot.data?.docs[index].id ?? "1",
-                      itemName: snapshot.data?.docs[index].get("name") ?? "1",
-                      price: snapshot.data?.docs[index].get("price") ?? 0,
-                      imagePath: snapshot.data?.docs[index].get("image_path") ?? "1"
+                      itemId: idList[index],
+                      itemName: snapshot.data?.docs[snapshot.data!.docs.indexWhere((element) => element.id == idList[index])].get("name"),
+                      price: snapshot.data?.docs[snapshot.data!.docs.indexWhere((element) => element.id == idList[index])].get("price"),
+                      imagePath: snapshot.data?.docs[snapshot.data!.docs.indexWhere((element) => element.id == idList[index])].get("image_path")
                   );
                 }
             );
@@ -46,4 +38,5 @@ class _CatalogState extends State<Catalog> {
       },
     );
   }
+
 }

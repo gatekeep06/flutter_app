@@ -45,7 +45,7 @@ class _SignInState extends State<SignIn> {
           nonExistentPerson.telNumber,
           nonExistentPerson.login,
           nonExistentPerson.password));
-      Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
+      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => Home()), (Route<dynamic> route) => false);
     }
 
   }

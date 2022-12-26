@@ -35,7 +35,7 @@ class _ProfileSettingsPageState extends State<ProfileSettingsPage> {
                       child: Icon(Icons.exit_to_app),
                       onTap: () {
                         currentUser.delUser();
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
+                        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => Home()), (Route<dynamic> route) => false);
                       }
                   )
                 )

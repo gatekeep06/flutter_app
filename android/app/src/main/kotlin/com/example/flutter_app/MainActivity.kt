@@ -2,60 +2,18 @@ package com.example.flutter_app
 
 
 import io.flutter.embedding.android.FlutterActivity
-import androidx.annotation.NonNull
-import com.example.flutter_app.classes.Constants
-import com.example.flutter_app.classes.Item
-import com.example.flutter_app.classes.ItemList
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodChannel
+import java.io.*
 
 class MainActivity : FlutterActivity() {
     private val PATH = "samples.flutter_app.dev/item"
-
-    val list: List<Item> = listOf(Constants.locItem, Constants.locItem2)
+    val favorites_file = File("favorites.data")
+    val cart_file = File("cart.data")
 
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
         MethodChannel(flutterEngine.dartExecutor.binaryMessenger, PATH).setMethodCallHandler { call, result ->
-            if (call.method == "getItemName") {
-                val itemPart = list[call.argument("itemId")!!].name
-                result.success(itemPart)
-            };
-            if (call.method == "getDescription") {
-                val itemPart = list[call.argument("itemId")!!].description
-                result.success(itemPart)
-            };
-            if (call.method == "getItemPrice") {
-                val itemPart = list[call.argument("itemId")!!].price
-                result.success(itemPart)
-            };
-            if (call.method == "getImagePath") {
-                val itemPart = list[call.argument("itemId")!!].imagePath
-                result.success(itemPart)
-            };
-            if (call.method == "getCatalogSize") {
-                val catalogSize = list.size
-                result.success(catalogSize)
-            };
-            if (call.method == "searchItemsByName") {
-                val resultList = mutableListOf<Int>()
-                for (i in list) {
-                    if (i.name.lowercase().contains(call.argument<String>("searchString")!!.lowercase())) {
-                        resultList.add(list.indexOf(i))
-                    }
-                }
-                if (resultList.isEmpty()) {
-                    for (i in list) {
-                        if (i.description.lowercase().contains(call.argument<String>("searchString")!!.lowercase())) {
-                            resultList.add(list.indexOf(i))
-                        }
-                    }
-                }
-                result.success(resultList)
-            }
-            else {
-                result.notImplemented()
-            }
         }
     }
 }

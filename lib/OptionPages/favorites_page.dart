@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/commodity_element_creator.dart';
 
 import '../commodity_element.dart';
 import '../favorites.dart';
@@ -18,12 +20,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(title: Text('Favorites')),
-        body: ListView.builder(
-            itemCount: favorites.getListSize(),
-            itemBuilder: (context, index) {
-              return CommodityElement(itemId: favorites.list[index]);
-            }
-        )
+        body: CommodityElementCreator().createCommodityElementByIdList(favorites.list)
     );
   }
 }
