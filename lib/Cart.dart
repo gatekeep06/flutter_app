@@ -4,7 +4,7 @@ import 'database_writer.dart';
 class Cart {
 
   static final Cart cart = Cart._internal();
-  List<String> list = <String>[];
+  List list = [];
 
   factory Cart() => cart;
 

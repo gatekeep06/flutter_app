@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app/favorites.dart';
 
-import 'cart.dart';
 import 'home.dart';
 
 void main() {

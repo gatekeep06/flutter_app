@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/favorites.dart';
 
 import 'HomePages/catalog.dart';
 import 'HomePages/profile/profile.dart';
@@ -30,8 +32,20 @@ class BottomNavMenu extends State<StatefulWidget> {
     });
   }
 
+  _getFavoritesFromBD() async {
+    var list = await (await FirebaseFirestore.instance.collection('users')
+        .get()).docs.firstWhere((element) => element.id == CurrentUser().user!.userId).get('favorites');
+    setState(() {
+      Favorites().list = list;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+
+    if (CurrentUser().isEntered) {
+      _getFavoritesFromBD();
+    }
 
     return Scaffold(
       appBar: AppBar(

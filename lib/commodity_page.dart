@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_app/cart.dart';
+
+import 'Cart.dart';
 
 class CommodityPage extends StatefulWidget {
 

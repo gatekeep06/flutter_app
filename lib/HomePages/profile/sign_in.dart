@@ -41,7 +41,9 @@ class _SignInState extends State<SignIn> {
           i.get('last_name'),
           i.get('number'),
           i.get('login'),
-          i.get('password')
+          i.get('password'),
+          i.get('favorites'),
+          i.get('cart')
         ));
         Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => Home()), (Route<dynamic> route) => false);
         break;
@@ -90,7 +92,12 @@ class _SignInState extends State<SignIn> {
                 children: [
                   Switch(
                       value: switchButtonValue,
-                      onChanged: (value) => setState(() => switchButtonValue = value)
+                      onChanged: (value) {
+                        setState(() {
+                          switchButtonValue = value;
+                          CurrentUser().rememberMe = switchButtonValue;
+                        });
+                      }
                   ),
                   const Text('Remember me')
                 ],

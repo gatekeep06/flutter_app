@@ -6,21 +6,9 @@ import 'package:flutter_app/database_writer.dart';
 class Favorites {
 
   static final Favorites favorites = Favorites._internal();
-  List<String> list = <String>[];
+  List list = [];
 
-  getData(String table, String itemId, String field) async {
-    list = await (await FirebaseFirestore.instance.collection(table).get()).docs.firstWhere((element) => element.id == itemId).get(field);
-  }
-
-  factory Favorites() {
-    if (CurrentUser().isEntered) {
-      favorites.getData('users', CurrentUser().user!.userId, 'favorites');
-      return favorites;
-    }
-    else {
-      return favorites;
-    }
-  }
+  factory Favorites() => favorites;
 
   Favorites._internal();
 
