@@ -9,23 +9,25 @@ class CommodityElement extends StatefulWidget {
 
   final String itemId;
   final String itemName;
+  final String description;
   final double price;
   final String imagePath;
 
-  const CommodityElement({Key? key, required this.itemId, required this.itemName, required this.price, required this.imagePath}) : super(key: key);
+  const CommodityElement({Key? key, required this.itemId, required this.itemName, required this.description, required this.price, required this.imagePath}) : super(key: key);
 
   @override
-  State<CommodityElement> createState() => _CommodityElementState(itemId, itemName, price, imagePath);
+  State<CommodityElement> createState() => _CommodityElementState(itemId, itemName, description, price, imagePath);
 }
 
 class _CommodityElementState extends State<CommodityElement> {
 
   String _itemId;
   String _itemName;
+  String _description;
   double _price;
   String _imagePath;
 
-  _CommodityElementState(this._itemId, this._itemName, this._price, this._imagePath);
+  _CommodityElementState(this._itemId, this._itemName, this._description, this._price, this._imagePath);
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +67,7 @@ class _CommodityElementState extends State<CommodityElement> {
                 ],
               ),
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => CommodityPage(itemId: _itemId, itemName: _itemName, price: _price, imagePath: _imagePath,)));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => CommodityPage(itemId: _itemId, itemName: _itemName, description: _description, price: _price, imagePath: _imagePath)));
               },
           )
         )

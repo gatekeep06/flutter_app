@@ -6,13 +6,14 @@ class CommodityPage extends StatefulWidget {
 
   final String itemId;
   final String itemName;
+  final String description;
   final double price;
   final String imagePath;
 
-  const CommodityPage({Key? key, required this.itemId, required this.itemName, required this.price, required this.imagePath}) : super(key: key);
+  const CommodityPage({Key? key, required this.itemId, required this.itemName, required this.description, required this.price, required this.imagePath}) : super(key: key);
 
   @override
-  State<CommodityPage> createState() => _CommodityPageState(itemId, itemName, price, imagePath);
+  State<CommodityPage> createState() => _CommodityPageState(itemId, itemName, description, price, imagePath);
 }
 
 class _CommodityPageState extends State<CommodityPage> {
@@ -21,11 +22,11 @@ class _CommodityPageState extends State<CommodityPage> {
 
   String itemId;
   String _itemName;
-  String _description = "";
+  String _description;
   double _price;
   String _imagePath;
 
-  _CommodityPageState(this.itemId, this._itemName, this._price, this._imagePath);
+  _CommodityPageState(this.itemId, this._itemName, this._description, this._price, this._imagePath);
 
   @override
   Widget build(BuildContext context) {

@@ -22,6 +22,7 @@ class CommodityElementCreator {
                   return CommodityElement(
                       itemId: idList[index],
                       itemName: snapshot.data?.docs[snapshot.data!.docs.indexWhere((element) => element.id == idList[index])].get("name"),
+                      description: snapshot.data?.docs[snapshot.data!.docs.indexWhere((element) => element.id == idList[index])].get("description"),
                       price: snapshot.data?.docs[snapshot.data!.docs.indexWhere((element) => element.id == idList[index])].get("price"),
                       imagePath: snapshot.data?.docs[snapshot.data!.docs.indexWhere((element) => element.id == idList[index])].get("image_path")
                   );

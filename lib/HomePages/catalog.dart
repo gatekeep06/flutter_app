@@ -28,10 +28,11 @@ class _CatalogState extends State<Catalog> {
                 itemCount: snapshot.data!.docs.length,
                 itemBuilder: (context, index) {
                   return CommodityElement(
-                      itemId: snapshot.data?.docs[index].id ?? "1",
-                      itemName: snapshot.data?.docs[index].get("name") ?? "1",
-                      price: snapshot.data?.docs[index].get("price") ?? 0,
-                      imagePath: snapshot.data?.docs[index].get("image_path") ?? "1"
+                      itemId: snapshot.data!.docs[index].id,
+                      itemName: snapshot.data!.docs[index].get("name"),
+                      description: snapshot.data!.docs[index].get("description"),
+                      price: snapshot.data!.docs[index].get("price"),
+                      imagePath: snapshot.data!.docs[index].get("image_path")
                   );
                 }
             );
