@@ -17,26 +17,25 @@ class _SearchState extends State<Search> {
 
   int _searchBodyIndex = 0;
   List searchResults = [];
+  String selectedCategory = "none";
 
   List<String> categories = <String>[
-    'category 1',
-    'category 2',
-    'category 3',
-    'category 4',
-    'category 5',
-    'category 6'
+    'kitchen appliances',
+    'decor',
+    'household chemicals',
+    'furniture',
+    'misc',
   ];
 
   List<IconData> categoryIcons = <IconData>[
+    Icons.soup_kitchen,
+    Icons.deck,
+    Icons.water_drop,
+    Icons.table_restaurant,
     Icons.abc,
-    Icons.ac_unit_outlined,
-    Icons.access_alarm_sharp,
-    Icons.accessibility,
-    Icons.dangerous,
-    Icons.cabin
   ];
 
-  void _onTextChanged(int index) {
+  void _setSearchState(int index) {
     setState(() {
       _searchBodyIndex = index;
     });
@@ -44,54 +43,98 @@ class _SearchState extends State<Search> {
 
   @override
   Widget build(BuildContext context) {
-
     List<Widget> searchState = <Widget>[
       ListView.builder(
           itemCount: categories.length,
           itemBuilder: (context, index) {
-            return ListTile(title: Text(categories[index]), leading: Icon(categoryIcons[index]));
+            return ListTile(
+              title: Text(categories[index]),
+              leading: Icon(categoryIcons[index]),
+              onTap: () {
+                setState(() {
+                  selectedCategory = categories[index];
+                });
+              },
+            );
           }
       ),
       StreamBuilder(
           stream: FirebaseFirestore.instance.collection('items').snapshots(),
           builder: (context, snapshot) {
-            if (snapshot.connectionState != ConnectionState.done && snapshot.connectionState != ConnectionState.active) {
-              return Container(alignment: Alignment.center, child: CircularProgressIndicator());
+            if (snapshot.connectionState != ConnectionState.done &&
+                snapshot.connectionState != ConnectionState.active) {
+              return Container(alignment: Alignment.center,
+                  child: CircularProgressIndicator());
             }
             searchResults.clear();
             for (var i in snapshot.data!.docs) {
-              if (i.get('name').toString().toLowerCase().contains(textControllerForSearch.text.toLowerCase())) {
+              if (i.get('name').toString().toLowerCase().contains(
+                  textControllerForSearch.text.toLowerCase())) {
                 searchResults.add(i.id);
               }
             }
-            return CommodityElementCreator().createCommodityElementByIdList(searchResults);
+            return CommodityElementCreator().createCommodityElementByIdList(
+                searchResults);
           }
       )
     ];
 
-    return Scaffold(
-        appBar: AppBar(
-          title: TextField(
-            controller: textControllerForSearch,
-            onChanged: (inputValue){
-              if (inputValue.trim().isEmpty) {
-                _onTextChanged(0);
-              }
-              else {
-                _onTextChanged(1);
-              }
-            },
-            decoration: const InputDecoration(
-                suffixIcon: Icon(Icons.search),
-                hintText: 'Search',
-                border: UnderlineInputBorder(),
-                fillColor: Colors.white,
-                filled: true
+    if (selectedCategory == "none") {
+      return Scaffold(
+          appBar: AppBar(
+            title: TextField(
+              controller: textControllerForSearch,
+              onChanged: (inputValue) {
+                if (inputValue
+                    .trim()
+                    .isEmpty) {
+                  _setSearchState(0);
+                }
+                else {
+                  _setSearchState(1);
+                }
+              },
+              decoration: const InputDecoration(
+                  suffixIcon: Icon(Icons.search),
+                  hintText: 'Search',
+                  border: UnderlineInputBorder(),
+                  fillColor: Colors.white,
+                  filled: true
+              ),
             ),
           ),
-        ),
-        body: searchState.elementAt(_searchBodyIndex)
+          body: searchState.elementAt(_searchBodyIndex)
 
       );
     }
+    else {
+      return WillPopScope(
+          onWillPop: () async {
+            setState(() {
+              selectedCategory = "none";
+            });
+            return false;
+          },
+          child: Scaffold(
+              appBar: AppBar(title: Text(selectedCategory)),
+              body: StreamBuilder(
+                  stream: FirebaseFirestore.instance.collection('items').snapshots(),
+                  builder: (context, snapshot) {
+                    searchResults.clear();
+                    if (snapshot.connectionState != ConnectionState.done && snapshot.connectionState != ConnectionState.active) {
+                      return Container(alignment: Alignment.center,
+                          child: CircularProgressIndicator());
+                    }
+                    for (var i in snapshot.data!.docs) {
+                      if (i.get('category').toString().toLowerCase().contains(selectedCategory)) {
+                        searchResults.add(i.id);
+                      }
+                    }
+                    return CommodityElementCreator().createCommodityElementByIdList(searchResults);
+                  }
+              )
+          )
+      );
+    }
+  }
 }
