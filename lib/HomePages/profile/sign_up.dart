@@ -1,7 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_app/Cart.dart';
+import 'package:flutter_app/current_orders.dart';
 import 'package:flutter_app/database_writer.dart';
+import 'package:flutter_app/favorites.dart';
 import 'package:flutter_app/user.dart';
 
 class SignUp extends StatefulWidget {
@@ -18,6 +21,7 @@ class _SignUpState extends State<SignUp> {
   bool isLoginCorrect = true;
   bool isPasswordCorrect = true;
   bool isConfirmCorrect = true;
+  bool isDataUnique = true;
 
   TextEditingController textControllerForFirstName = TextEditingController();
   TextEditingController textControllerForLastName = TextEditingController();
@@ -58,24 +62,34 @@ class _SignUpState extends State<SignUp> {
     });
   }
 
+  setDataUniqueness(bool valid) {
+    setState(() {
+      isDataUnique = valid;
+    });
+  }
+
   _doSignUp() async {
     var db = (await FirebaseFirestore.instance.collection('users').get()).docs;
+    setDataUniqueness(true);
     for (var i in db) {
-      if (i.get('login').toString() == textControllerForLogin.text || i.get('number').toString() == textControllerForTelNumber.text) {
-        setState(() {
-          setLoginCorrectness(false);
-          return;
-        });
+      if (i.get('login') == textControllerForLogin.text || i.get('number') == textControllerForTelNumber.text) {
+        setDataUniqueness(false);
       }
     }
-    DataBaseWriter().addToDB('users', {
-      'image_path': "https://cdn-images-1.medium.com/max/1200/1*5-aoK8IBmXve5whBQM90GA.png",
-      'first_name': textControllerForFirstName.text,
-      'last_name': textControllerForLastName.text,
-      'number': textControllerForTelNumber.text,
-      'login': textControllerForLogin.text,
-      'password': textControllerForPassword.text});
-    Navigator.pop(context);
+    if (isDataUnique) {
+      DataBaseWriter().addToDB('users', {
+        'image_path': "https://cdn-images-1.medium.com/max/1200/1*5-aoK8IBmXve5whBQM90GA.png",
+        'first_name': textControllerForFirstName.text,
+        'last_name': textControllerForLastName.text,
+        'number': textControllerForTelNumber.text,
+        'login': textControllerForLogin.text,
+        'password': textControllerForPassword.text,
+        'cart': Cart().list,
+        'favorites': Favorites().list,
+        'current_orders': CurrentOrders().list,
+        'history': []});
+      Navigator.pop(context);
+    }
   }
 
   @override

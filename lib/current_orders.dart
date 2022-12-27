@@ -17,7 +17,7 @@ class CurrentOrders {
     }
   }
 
-  removeFromCart(String id) {
+  removeFromOrders(String id) {
     list.remove(id);
     if (CurrentUser().isEntered) {
       DataBaseWriter().updateDB('users', CurrentUser().user!.userId, 'current_orders', list);

@@ -35,7 +35,7 @@ class _OrderElementState extends State<OrderElement> {
             child: Row(
             children: [
               Text("Order id: $_orderId", style: TextStyle(fontSize: 10)),
-              Expanded(child: Text('$_price \$'))
+              Expanded(child: Align(alignment: Alignment.topRight, child: Text('$_price \$')))
             ],
           ),
         ),
